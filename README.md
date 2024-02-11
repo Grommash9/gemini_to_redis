@@ -25,6 +25,16 @@ Run redis container
 docker run --name redis -d -p 6379:6379 redis redis-server --requirepass "redispw"
 ```
 
+Build container for parser
+```
+docker build -t gemini_to_redis .
+```
+
+Run the parser (here we are using 192.168.0.20 as machine local address because we are running redis in another container so 127.0.0.1 will not work fine because there is no redis inside our gemini docker image)
+```
+docker run -e REDIS_HOST=192.168.0.20 -e REDIS_PORT=6379 -e REDIS_PASSWORD=redispw gemini_to_redis
+
+```
 
 ## Check information stored inside Redis
 You can open console inside your docker image by command:
